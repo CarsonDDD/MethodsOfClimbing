@@ -35,6 +35,4 @@ public class XRDirectClimbInteractor : XRDirectInteractor
 
 		ClimbHandDeactivated?.Invoke(controllerTag);
 	}
-
-
 }

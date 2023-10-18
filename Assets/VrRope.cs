@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
+// Add grabbable point to each control point to climb
 [RequireComponent(typeof(ObiRope))]
 public class VrRope : MonoBehaviour
 {
