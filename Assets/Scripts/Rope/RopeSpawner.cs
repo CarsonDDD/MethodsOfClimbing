@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+public class RopeSpawner : MonoBehaviour
 {
     [SerializeField]
     private GameObject jointPrefab;
@@ -16,8 +16,7 @@ public class NewBehaviourScript : MonoBehaviour
 
     [SerializeField]
     private bool reset, spawn, hangInAir;
-    
-    
+  
 
     // Update is called once per frame
     void Update()
@@ -51,19 +50,15 @@ public class NewBehaviourScript : MonoBehaviour
             joint.name = "joint " + transform.childCount;
 
             // If this is the first joint in the sequence, we dont want it to be attached to anything (things are attached to it)
-            // I can also check if prev joint is null
             if(previousJoint == null) {
                 Destroy(joint.GetComponent<HingeJoint>());
+                // Maybe not destroy the hinge?
 
                 if(hangInAir) {
                     joint.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
                 }
             }
             else {
-				// Connect the joint to the previous joint
-				// Connecting based off string name is bad
-				//joint.GetComponent<HingeJoint>().connectedBody = transform.Find("joint " + (transform.childCount - 1).ToString()).GetComponent<Rigidbody>();
-
 				joint.GetComponent<HingeJoint>().connectedBody = previousJoint.GetComponent<Rigidbody>();
 			}
 
