@@ -16,10 +16,21 @@ public class RopeSpawner : MonoBehaviour
 
     [SerializeField]
     private bool reset, spawn, hangInAir;
-  
 
-    // Update is called once per frame
-    void Update()
+	private void OnValidate()
+	{
+		// The `#if UNITY_EDITOR` preprocessor directive is used to ensure that the code within it is only executed in the Unity editor and not in a built game.
+#if UNITY_EDITOR
+
+		if(spawn) {
+			Spawn();
+			spawn = false;
+		}
+#endif
+	}
+
+	// Update is called once per frame
+	void Update()
     {
         if(reset) {
 			//remove sub children
