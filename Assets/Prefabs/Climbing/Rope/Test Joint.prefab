@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &8429142958569085078
+--- !u!1 &5090166629647275573
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,52 +8,52 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5942163494701250314}
-  - component: {fileID: 2664031700447290531}
-  - component: {fileID: 4547154590070492673}
-  - component: {fileID: 3103104121375926891}
-  - component: {fileID: 989068259071696566}
-  - component: {fileID: 6402327933738485619}
-  - component: {fileID: 6105274994413166110}
-  - component: {fileID: -1102802462417451754}
-  - component: {fileID: 5031471408489995255}
+  - component: {fileID: 8244764949568218874}
+  - component: {fileID: 7705410380915975726}
+  - component: {fileID: 8898270087002931807}
+  - component: {fileID: 8709614895115684859}
+  - component: {fileID: 1313491873699405034}
+  - component: {fileID: 7082134953320981169}
+  - component: {fileID: 7005885949507369098}
+  - component: {fileID: 7022910181011348515}
+  - component: {fileID: 7832835612706848380}
   m_Layer: 3
-  m_Name: Rope Joint
+  m_Name: Test Joint
   m_TagString: Climbable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5942163494701250314
+--- !u!4 &8244764949568218874
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8429142958569085078}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_GameObject: {fileID: 5090166629647275573}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.12, z: 0.1}
+  m_LocalScale: {x: 0.075, y: 0.08, z: 0.075}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &2664031700447290531
+--- !u!33 &7705410380915975726
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8429142958569085078}
+  m_GameObject: {fileID: 5090166629647275573}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &4547154590070492673
+--- !u!23 &8898270087002931807
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8429142958569085078}
+  m_GameObject: {fileID: 5090166629647275573}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -89,13 +89,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &3103104121375926891
+--- !u!135 &8709614895115684859
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8429142958569085078}
+  m_GameObject: {fileID: 5090166629647275573}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -108,15 +108,15 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.68
+  m_Radius: 0.6
   m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &989068259071696566
+--- !u!54 &1313491873699405034
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8429142958569085078}
+  m_GameObject: {fileID: 5090166629647275573}
   serializedVersion: 4
   m_Mass: 1
   m_Drag: 0
@@ -137,13 +137,13 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &6402327933738485619
+--- !u!114 &7082134953320981169
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8429142958569085078}
+  m_GameObject: {fileID: 5090166629647275573}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0ad34abafad169848a38072baa96cdb2, type: 3}
@@ -155,7 +155,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_InteractionLayers:
-    m_Bits: 4294967295
+    m_Bits: 8
   m_DistanceCalculationMode: 1
   m_SelectMode: 0
   m_CustomReticle: {fileID: 0}
@@ -186,13 +186,37 @@ MonoBehaviour:
       m_Calls: []
   m_SelectEntered:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7832835612706848380}
+        m_TargetAssemblyTypeName: RopeJoint, Assembly-CSharp
+        m_MethodName: TriggerHaptic
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_SelectExited:
     m_PersistentCalls:
       m_Calls: []
   m_Activated:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7832835612706848380}
+        m_TargetAssemblyTypeName: RopeJoint, Assembly-CSharp
+        m_MethodName: TriggerHaptic
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_Deactivated:
     m_PersistentCalls:
       m_Calls: []
@@ -272,33 +296,35 @@ MonoBehaviour:
   m_StartingSingleGrabTransformers: []
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
---- !u!114 &6105274994413166110
+--- !u!114 &7005885949507369098
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8429142958569085078}
+  m_GameObject: {fileID: 5090166629647275573}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a68f69d4fbbd4a14e8a7e576d3159100, type: 3}
+  m_Script: {fileID: 11500000, guid: 991c69b8a1b6a444a9177914f77cf7d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hapticIntensity: 0
-  hapticDuration: 0
---- !u!59 &-1102802462417451754
+  m_TintColor: {r: 0.6415094, g: 0.6178932, b: 0.33588463, a: 1}
+  m_TintOnHover: 1
+  m_TintOnSelection: 0
+  m_TintRenderers: []
+--- !u!59 &7022910181011348515
 HingeJoint:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8429142958569085078}
+  m_GameObject: {fileID: 5090166629647275573}
   m_ConnectedBody: {fileID: 0}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0, y: 0.5, z: 0}
+  m_Anchor: {x: 0, y: 0.99999994, z: 0}
   m_Axis: {x: 0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  m_ConnectedAnchor: {x: 0, y: 0.11999999, z: 0}
   serializedVersion: 2
   m_UseSpring: 0
   m_Spring:
@@ -325,19 +351,17 @@ HingeJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!114 &5031471408489995255
+--- !u!114 &7832835612706848380
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8429142958569085078}
+  m_GameObject: {fileID: 5090166629647275573}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 991c69b8a1b6a444a9177914f77cf7d1, type: 3}
+  m_Script: {fileID: 11500000, guid: a68f69d4fbbd4a14e8a7e576d3159100, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TintColor: {r: 0.6226415, g: 0.6135671, b: 0.36712354, a: 1}
-  m_TintOnHover: 1
-  m_TintOnSelection: 1
-  m_TintRenderers: []
+  hapticIntensity: 0.103
+  hapticDuration: 0.5
