@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class RopeSpawner : MonoBehaviour
 {
     [SerializeField]
     private GameObject jointPrefab;
 
     [SerializeField]
-    [Range(1, 500)]
+    [Range(1, 10)]
     private int length = 1;
 
     [SerializeField]
@@ -50,28 +51,35 @@ public class RopeSpawner : MonoBehaviour
     {
         int jointsToSpawn = (int)(length/jointDistance);
 
-        GameObject previousJoint = null; // Temp used when linking sasuages
+        GameObject previousJoint = transform.gameObject; // First link in sausage is the spawner
+		GameObject joint;
 
-        for(int i =0; i < jointsToSpawn; i++) {
-            GameObject joint;
-            Vector3 spawnLocation = new Vector3(transform.position.x, transform.position.y + (jointDistance * i), transform.position.z);
-            joint = Instantiate(jointPrefab, spawnLocation, Quaternion.identity, transform);
-            joint.transform.eulerAngles = new Vector3(180, 0,0 );
+		if(hangInAir) {
+			GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+		}
+        else {
+            GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+		}
 
-            joint.name = "joint " + transform.childCount;
+		for(int i =0; i < jointsToSpawn; i++) {
+			Vector3 spawnLocation = transform.position + transform.up * jointDistance * i;
+			joint = Instantiate(jointPrefab, spawnLocation, Quaternion.identity, transform);
+			joint.transform.rotation = transform.rotation;
+			joint.name = "joint " + transform.childCount;
 
             // If this is the first joint in the sequence, we dont want it to be attached to anything (things are attached to it)
-            if(previousJoint == null) {
-                Destroy(joint.GetComponent<HingeJoint>());
+            /*if(i == 0 previousJoint == null) {
+                //Destroy(joint.GetComponent<HingeJoint>());
                 // Maybe not destroy the hinge?
+                //The hinge isnt getting destroyed?
+                // This definitely doesnt destroy the hinge
 
-                if(hangInAir) {
-                    joint.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-                }
+                // Maybe hinge to a parent rigid?
+                previousJoint = transform.gameObject;// Cant do .this?
             }
             else {
-				joint.GetComponent<HingeJoint>().connectedBody = previousJoint.GetComponent<Rigidbody>();
-			}
+			}*/
+			joint.GetComponent<HingeJoint>().connectedBody = previousJoint.GetComponent<Rigidbody>();
 
             previousJoint = joint;
         }
