@@ -65,6 +65,7 @@ public class RopeSpawner : MonoBehaviour
 			Vector3 spawnLocation = transform.position + transform.up * jointDistance * i;
 			joint = Instantiate(jointPrefab, spawnLocation, Quaternion.identity, transform);
 			joint.transform.rotation = transform.rotation;
+            joint.transform.Rotate(Vector3.right, 180f);
 			joint.name = "joint " + transform.childCount;
 
             // If this is the first joint in the sequence, we dont want it to be attached to anything (things are attached to it)
