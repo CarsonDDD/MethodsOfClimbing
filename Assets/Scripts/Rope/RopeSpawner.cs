@@ -39,6 +39,7 @@ public class RopeSpawner : MonoBehaviour
 				DestroyImmediate(transform.GetChild(0).gameObject);
 			}
 			reset = false;
+            Spawn();
         }
 
         if(spawn) {
