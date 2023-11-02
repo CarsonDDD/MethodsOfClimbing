@@ -3,12 +3,15 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Climbable
+  - LeftHand Controller
+  - RightHand Controller
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Rope Joint
   - Water
   - UI
   - 
