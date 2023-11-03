@@ -12,17 +12,31 @@ public class FootController : MonoBehaviour
 
 	// mirror mode?
 
-	// potential 'belt'
+	// potential 'belt'[
+
+	[Range(0.001f, 0.5f)]
+	[SerializeField] private float verticalMoveAmount;
 
 	public GameObject foot;
 	public InputActionReference lowerFootAction;
 	public InputActionReference raiseFootAction;
 
-
+	private bool isLowering = false;
+	private bool isRaising = false;
+	
 	void OnEnable()
 	{
 		lowerFootAction.action.started += LowerFoot;
+
 		raiseFootAction.action.started += RaiseFoot;
+
+		lowerFootAction.action.started += e => isLowering = true;
+		lowerFootAction.action.canceled += e => isLowering = false;
+
+		raiseFootAction.action.started += e => isRaising = true;
+		raiseFootAction.action.canceled += e => isRaising = false;
+
+
 	}
 
 	void OnDisable()
@@ -40,19 +54,30 @@ public class FootController : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-
+		if(isRaising && isLowering) {
+			ResetFootRotation();
+		}
 	}
 
 	private void RaiseFoot(InputAction.CallbackContext context)
 	{
 		Debug.Log("Foot Raised!");
-		foot.transform.position += 1f * foot.transform.up;
+		foot.transform.position += verticalMoveAmount * foot.transform.up;
 	}
 
 	private void LowerFoot(InputAction.CallbackContext context)
 	{
 		Debug.Log("Foot lowered!");
-		foot.transform.position -= 1f * foot.transform.up;
+		foot.transform.position -= verticalMoveAmount * foot.transform.up;
+	}
+
+	private void ResetFootRotation()
+	{
+		Debug.Log("Foot rotation reset!");
+		foot.transform.localRotation = Quaternion.Euler(0f, 0f, 90f);
+
+		// reset parent rotation to ignore magic num
+		//transform.rotation = Quaternion.identity;
 	}
 
 
