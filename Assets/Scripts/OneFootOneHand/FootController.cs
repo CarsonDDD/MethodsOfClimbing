@@ -43,7 +43,14 @@ public class FootController : MonoBehaviour
 	{
 		lowerFootAction.action.started -= LowerFoot;
 		raiseFootAction.action.started -= RaiseFoot;
+
+		lowerFootAction.action.started -= e => isLowering = true;
+		lowerFootAction.action.canceled -= e => isLowering = false;
+
+		raiseFootAction.action.started -= e => isRaising = true;
+		raiseFootAction.action.canceled -= e => isRaising = false;
 	}
+
 
 	// Start is called before the first frame update
 	void Start()
@@ -54,6 +61,7 @@ public class FootController : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
+		// Not working
 		if(isRaising && isLowering) {
 			ResetFootRotation();
 		}
