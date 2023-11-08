@@ -29345,7 +29345,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 151491596797192932, guid: f88e87c4eed1fcb478e50f032e46d097, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3138478893364275149, guid: f88e87c4eed1fcb478e50f032e46d097, type: 3}
+      propertyPath: m_Name
+      value: Main Camera and Head
       objectReference: {fileID: 0}
     - target: {fileID: 3740671292052529494, guid: f88e87c4eed1fcb478e50f032e46d097, type: 3}
       propertyPath: m_Name

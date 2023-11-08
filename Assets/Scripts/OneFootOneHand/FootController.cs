@@ -35,8 +35,6 @@ public class FootController : MonoBehaviour
 
 		raiseFootAction.action.started += e => isRaising = true;
 		raiseFootAction.action.canceled += e => isRaising = false;
-
-
 	}
 
 	void OnDisable()
@@ -50,7 +48,6 @@ public class FootController : MonoBehaviour
 		raiseFootAction.action.started -= e => isRaising = true;
 		raiseFootAction.action.canceled -= e => isRaising = false;
 	}
-
 
 	// Start is called before the first frame update
 	void Start()
@@ -87,6 +84,4 @@ public class FootController : MonoBehaviour
 		// reset parent rotation to ignore magic num
 		//transform.rotation = Quaternion.identity;
 	}
-
-
 }
