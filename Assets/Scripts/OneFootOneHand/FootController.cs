@@ -10,10 +10,6 @@ public class FootController : MonoBehaviour
 
 	// rotation reset
 
-	// mirror mode?
-
-	// potential 'belt'[
-
 	[Range(0.001f, 0.5f)]
 	[SerializeField] private float verticalMoveAmount;
 
