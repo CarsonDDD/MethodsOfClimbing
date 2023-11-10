@@ -28,8 +28,6 @@ public class HarnessController : MonoBehaviour
 		// lock rotation to only y
 		targetRotation.x = 0;
 		targetRotation.z = 0;
-
-		// apply our seperate y adjustment
 		targetPosition.y = headTransform.position.y - heightOffset;
 
 		transform.position = targetPosition;
