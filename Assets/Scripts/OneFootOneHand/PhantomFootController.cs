@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class PhantomFootController : MonoBehaviour
 {
+	public enum PhantomFootImplmentation
+	{
+		HandBased,
+		MirrorFoot,
+	}
+
+	public PhantomFootImplmentation trackingMethod = PhantomFootImplmentation.HandBased;
+
 	public FootController realFoot;
 	public Transform leftHandController;
 	public Transform bodyCenter;// not nessesarily camera. Has harness issue
@@ -23,42 +31,94 @@ public class PhantomFootController : MonoBehaviour
 	void Update()
 	{
 		// Only show if real foot is showing
-		if(realFoot.gameObject.activeSelf) {
-			if(!phantomFootInstance.activeSelf) {
-				phantomFootInstance.SetActive(true);
-			}
-
-			// mirror
-			/*Vector3 mirroredPosition = MirrorPosition(realFoot.transform.position);
-			phantomFootInstance.transform.position = mirroredPosition;
-			phantomFootInstance.transform.rotation = Quaternion.Euler(0f, realFoot.transform.eulerAngles.y, -realFoot.transform.eulerAngles.z);*/
-
-			
-			Vector3 desiredPosition = new Vector3(leftHandController.position.x,realFoot.transform.position.y,leftHandController.position.z);
-
-			Vector3 relativePosition = desiredPosition - bodyCenter.position;
-
-			// Clamp the position to be within the threshold. 
-			relativePosition.x = Mathf.Clamp(relativePosition.x, -maxDistanceX, maxDistanceX);
-			relativePosition.z = Mathf.Clamp(relativePosition.z, -maxDistanceZ, maxDistanceZ);
-
-			
-			phantomFootInstance.transform.position = bodyCenter.position + relativePosition;
-
-			// match rotation of tracked foot
-			phantomFootInstance.transform.rotation = Quaternion.Euler(0,leftHandController.eulerAngles.y,0);
-		}
-		else {
+		if(!realFoot.gameObject.activeSelf) {
 			if(phantomFootInstance.activeSelf) {
 				phantomFootInstance.SetActive(false);
 			}
+			return;
 		}
+
+
+		if(!phantomFootInstance.activeSelf) {
+			phantomFootInstance.SetActive(true);
+		}
+
+
+		switch(trackingMethod) {
+			case PhantomFootImplmentation.HandBased:
+				HandBasedTracking();
+			break;
+			case PhantomFootImplmentation.MirrorFoot: 
+				MirriorBasedTracking();
+			break;
+		}
+
+		// mirror
+		/*Vector3 mirroredPosition = MirrorPosition(realFoot.transform.position);
+		phantomFootInstance.transform.position = mirroredPosition;
+		phantomFootInstance.transform.rotation = Quaternion.Euler(0f, realFoot.transform.eulerAngles.y, -realFoot.transform.eulerAngles.z);*/
+
+			
+		Vector3 desiredPosition = new Vector3(leftHandController.position.x,realFoot.transform.position.y,leftHandController.position.z);
+
+		Vector3 relativePosition = desiredPosition - bodyCenter.position;
+
+		// Clamp the position to be within the threshold. 
+		relativePosition.x = Mathf.Clamp(relativePosition.x, -maxDistanceX, maxDistanceX);
+		relativePosition.z = Mathf.Clamp(relativePosition.z, -maxDistanceZ, maxDistanceZ);
+
+			
+		phantomFootInstance.transform.position = bodyCenter.position + relativePosition;
+
+		// match rotation of tracked foot
+		phantomFootInstance.transform.rotation = Quaternion.Euler(0,leftHandController.eulerAngles.y,0);
 	}
 
-	private bool IsFootForward(Transform footTransform, Transform bodyCenter)
+	// used for in editor access
+	public void SwitchTrackingMethod(PhantomFootImplmentation newMethod)
+	{
+		trackingMethod = newMethod;
+	}
+
+	public void SwitchToHandBased()
+	{
+		trackingMethod = PhantomFootImplmentation.HandBased;
+	}
+
+	public void SwitchToMirrorBased()
+	{
+		trackingMethod = PhantomFootImplmentation.MirrorFoot;
+	}
+
+	private void HandBasedTracking()
+	{
+		Vector3 desiredPosition = new Vector3(leftHandController.position.x, realFoot.transform.position.y, leftHandController.position.z);
+
+		Vector3 relativePosition = desiredPosition - bodyCenter.position;
+
+		// Clamp the position to be within the threshold. 
+		relativePosition.x = Mathf.Clamp(relativePosition.x, -maxDistanceX, maxDistanceX);
+		relativePosition.z = Mathf.Clamp(relativePosition.z, -maxDistanceZ, maxDistanceZ);
+
+
+		phantomFootInstance.transform.position = bodyCenter.position + relativePosition;
+
+		// match rotation of tracked foot
+		phantomFootInstance.transform.rotation = Quaternion.Euler(0, leftHandController.eulerAngles.y, 0);
+	}
+
+	private void MirriorBasedTracking()
+	{
+		Vector3 mirroredPosition = MirrorPosition(realFoot.transform.position);
+		phantomFootInstance.transform.position = mirroredPosition;
+		phantomFootInstance.transform.rotation = Quaternion.Euler(0f, realFoot.transform.eulerAngles.y, -realFoot.transform.eulerAngles.z);
+	}
+
+	// I forget what this was for
+	/*private bool IsFootForward(Transform footTransform, Transform bodyCenter)
 	{
 		return Vector3.Dot((footTransform.position-bodyCenter.position).normalized, bodyCenter.forward) >0;
-	}
+	}*/
 
 	private Vector3 MirrorPosition(Vector3 originalPosition)
 	{
