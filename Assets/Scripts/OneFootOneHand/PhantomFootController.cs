@@ -7,7 +7,8 @@ public class PhantomFootController : MonoBehaviour
 	public enum PhantomFootImplmentation
 	{
 		HandBased,
-		MirrorFoot,
+		DirectMirror,
+		InverseMirror
 	}
 
 	public PhantomFootImplmentation trackingMethod = PhantomFootImplmentation.HandBased;
@@ -48,30 +49,13 @@ public class PhantomFootController : MonoBehaviour
 			case PhantomFootImplmentation.HandBased:
 				HandBasedTracking();
 			break;
-			case PhantomFootImplmentation.MirrorFoot: 
-				MirriorBasedTracking();
+			case PhantomFootImplmentation.DirectMirror: 
+				DirectMirrorTracking();
+			break;
+			case PhantomFootImplmentation.InverseMirror:
+				InverseMirrorTracking();
 			break;
 		}
-
-		// mirror
-		/*Vector3 mirroredPosition = MirrorPosition(realFoot.transform.position);
-		phantomFootInstance.transform.position = mirroredPosition;
-		phantomFootInstance.transform.rotation = Quaternion.Euler(0f, realFoot.transform.eulerAngles.y, -realFoot.transform.eulerAngles.z);*/
-
-			
-		Vector3 desiredPosition = new Vector3(leftHandController.position.x,realFoot.transform.position.y,leftHandController.position.z);
-
-		Vector3 relativePosition = desiredPosition - bodyCenter.position;
-
-		// Clamp the position to be within the threshold. 
-		relativePosition.x = Mathf.Clamp(relativePosition.x, -maxDistanceX, maxDistanceX);
-		relativePosition.z = Mathf.Clamp(relativePosition.z, -maxDistanceZ, maxDistanceZ);
-
-			
-		phantomFootInstance.transform.position = bodyCenter.position + relativePosition;
-
-		// match rotation of tracked foot
-		phantomFootInstance.transform.rotation = Quaternion.Euler(0,leftHandController.eulerAngles.y,0);
 	}
 
 	// used for in editor access
@@ -80,15 +64,11 @@ public class PhantomFootController : MonoBehaviour
 		trackingMethod = newMethod;
 	}
 
-	public void SwitchToHandBased()
-	{
-		trackingMethod = PhantomFootImplmentation.HandBased;
-	}
+	public void SwitchToHandBased() => trackingMethod = PhantomFootImplmentation.HandBased;
 
-	public void SwitchToMirrorBased()
-	{
-		trackingMethod = PhantomFootImplmentation.MirrorFoot;
-	}
+	public void SwitchToMirrorBased() => trackingMethod = PhantomFootImplmentation.DirectMirror;
+
+	public void SwitchToInverseMirrorBased() => trackingMethod = PhantomFootImplmentation.InverseMirror;
 
 	private void HandBasedTracking()
 	{
@@ -107,9 +87,14 @@ public class PhantomFootController : MonoBehaviour
 		phantomFootInstance.transform.rotation = Quaternion.Euler(0, leftHandController.eulerAngles.y, 0);
 	}
 
-	private void MirriorBasedTracking()
+	private void DirectMirrorTracking()
 	{
-		Vector3 mirroredPosition = MirrorPosition(realFoot.transform.position);
+		Vector3 localPosition = bodyCenter.InverseTransformPoint(realFoot.transform.position);
+
+		localPosition.x = -localPosition.x;// mirror
+
+		Vector3 mirroredPosition = bodyCenter.TransformPoint(localPosition);
+
 		phantomFootInstance.transform.position = mirroredPosition;
 		phantomFootInstance.transform.rotation = Quaternion.Euler(0f, realFoot.transform.eulerAngles.y, -realFoot.transform.eulerAngles.z);
 	}
@@ -120,11 +105,18 @@ public class PhantomFootController : MonoBehaviour
 		return Vector3.Dot((footTransform.position-bodyCenter.position).normalized, bodyCenter.forward) >0;
 	}*/
 
-	private Vector3 MirrorPosition(Vector3 originalPosition)
+	private void InverseMirrorTracking()
 	{
-		Vector3 relativePosition = originalPosition-bodyCenter.position;
-		relativePosition.x = -relativePosition.x;
+		Vector3 localPosition = bodyCenter.InverseTransformPoint(realFoot.transform.position);
 
-		return bodyCenter.position + relativePosition;
+		localPosition.z = -localPosition.z;// font back.
+
+		localPosition.x = -localPosition.x;// side (normal mirror)
+
+		Vector3 insverseWorld = bodyCenter.TransformPoint(localPosition);
+
+		phantomFootInstance.transform.position = insverseWorld;
+		phantomFootInstance.transform.rotation = Quaternion.Euler(0f, realFoot.transform.eulerAngles.y, -realFoot.transform.eulerAngles.z);
 	}
+
 }

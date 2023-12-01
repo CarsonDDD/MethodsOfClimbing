@@ -401,6 +401,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58ead5bc3345dab42b20cfaaf1061ee8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  trackingMethod: 0
   realFoot: {fileID: 9149581657891460069}
   leftHandController: {fileID: 0}
   bodyCenter: {fileID: 3138478893364275150}
